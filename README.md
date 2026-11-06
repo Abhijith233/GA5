@@ -65,7 +65,7 @@ The output of the command was:
 
 <!-- Put the code to run TrimGalore in `protocol.md`, not here. -->
 
-*Answer*: Whether all batch jobs succeeded, and how you checked that (and any problems you encountered, and how you solved them):
+*Answer*: Whether all batch jobs succeeded, and how you checked that (and any problems you encountered, and how you solved them): All seven batches were completed successfully. The status of job was checked using squeue -u \$USER -l command. Inorder to see all the files have 'successfully finished' message, tail command was utilized (tail slurm-trimgalore-\*.out). Also fastq files ,and trimming reports were formed in output directory.
 
 ------------------------------------------------------------------------
 
