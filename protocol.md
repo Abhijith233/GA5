@@ -69,11 +69,44 @@ done
 
 ## Step 2: Creating a transcriptome index with Salmon
 
-\<???\>
+```         
+# Create a Salmon index 
+sbatch scripts/salmon_index.sh \    
+"$ref_transcripts" \    
+"$outdir"/salmon_index
+```
 
 ## Step 3: Pseudo-alignment and quantification with Salmon
 
-\<???\>
+```         
+# Define input and output directories 
+fastq_dir=results/trimgalore 
+index_dir=results/salmon_index 
+outdir=results/salmon_quant  
+
+# Create the output directory 
+mkdir -p "$outdir"  
+
+# Run Salmon quantification for each sample 
+for r1_fastq in "$fastq_dir"/S6*_R1.fastq.gz 
+do     
+r2_fastq="${r1_fastq/_R1/_R2}"      
+sbatch scripts/salmon_quant.sh \        
+"$r1_fastq" \         
+"$r2_fastq" \         
+"$index_dir" \       
+"$outdir" done
+
+# Display the header and the top three transcripts by NumReads
+(head -n 1 results/salmon_quant/S63/quant.sf
+tail -n +2 results/salmon_quant/S63/quant.sf | sort -k5,5nr | head -n 3)
+
+# Identify the gene corresponding to the top transcript
+zgrep -F "XM_039591534.2" data/ref/GCF_016801865.2_TS_CPP_V2_rna.fna.gz
+
+# Extract the mapping rates from Salmon quantification log files
+grep "mapping rate" results/salmon_quant/*/logs/salmon_quant.log
+```
 
 ## Step 4: Summarizing the results of all steps with MultiQC
 
