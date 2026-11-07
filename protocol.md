@@ -104,10 +104,15 @@ tail -n +2 results/salmon_quant/S63/quant.sf | sort -k5,5nr | head -n 3)
 # Identify the gene corresponding to the top transcript
 zgrep -F "XM_039591534.2" data/ref/GCF_016801865.2_TS_CPP_V2_rna.fna.gz
 
-# Extract the mapping rates from Salmon quantification log files
+# Getting the mapping rates from Salmon quantification log files
 grep "mapping rate" results/salmon_quant/*/logs/salmon_quant.log
 ```
 
 ## Step 4: Summarizing the results of all steps with MultiQC
 
-\<???\>
+```         
+# Run MultiQC on the entire results directory 
+indir=results 
+outdir=results/multiqc  
+sbatch scripts/multiqc.sh "$indir" "$outdir"
+```

@@ -155,19 +155,19 @@ results/salmon_quant/S69/logs/salmon_quant.log:mapping rate: 82.1824%
 
 ### 13: Run MultiQC
 
-*Answer*: For each program, the number of reports that MultiQC found, and why it found this number:
+*Answer*: For each program, the number of reports that MultiQC found, and why it found this number: Multiqc found reports from Salmon, Trimgalore and Fastqc. It found 7 salmon metareports, 7 fragment length distribution and 7 library format counts as salmon formed one report of each type for seven samples. It found 14 trim galore reports and 14 fastqc reports as the samples are paired ending having R1 and R2 so 14 reports.
 
 ### 14: The General Statistics table
 
-*Answer*: The sample with the lowest Salmon mapping rate, and whether this matches your answer to question 11:
+*Answer*: The sample with the lowest Salmon mapping rate, and whether this matches your answer to question 11: Sample 68 has the lowest mapping rate. Yes this matches the answer to question 11 where the same result was seen.
 
 ### 15: Adapter lengths
 
-*Answer*: The most common adapter lengths, whether this surprised you, and why you think these lengths are the most common:
+*Answer*: The most common adapter lengths, whether this surprised you, and why you think these lengths are the most common: The most common adapter length distribution is shown at 1 bp. It was surprising to see that these larger number of reads had only 1 bp adapter match. Then it was understood that Trim Galore has a default stringency of 1 bp accepting even single bases overlaps. Some of these could also be random sequence matches rather than adapter contamination.
 
 ### 16: Ask Claude about the MultiQC report
 
-*Answer*: What you asked, and what you learned from Claude's answer (in your own words):
+*Answer*: What you asked, and what you learned from Claude's answer (in your own words): I asked Salmon Why is salmon mapping rate differs from sample to sample? And it answered it depends on the RNA quality, library prep efficiency, adapter trimming leftovers, sequencing depth/error rate differences, and biological variation. Then I asked what is the generally acceptable mapping rate percentage? It said 80-85%+ is good/excellent, 70-80% acceptable and \<60-70%: investigate (contamination, wrong reference/species, poor library). Then I asked what factors could explain why one sample has a lower mapping rate than the others? It gave answer as Sample/library quality, contamination, Technical/sequencing and Biological.
 
 ------------------------------------------------------------------------
 
