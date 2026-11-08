@@ -1,3 +1,7 @@
+```         
+[![DOI](https://sandbox.zenodo.org/badge/1384068864.svg)](https://handle.test.datacite.org/10.5072/zenodo.637475)
+```
+
 # GA5 answers - Abhijith Anil
 
 ------------------------------------------------------------------------
@@ -159,3 +163,7 @@ results/salmon_quant/S69/logs/salmon_quant.log:mapping rate: 82.1824%
 ### 20: Get a (test) DOI with Zenodo
 
 *Answer*: Your Zenodo Sandbox DOI:
+
+```         
+[![DOI](https://sandbox.zenodo.org/badge/1384068864.svg)](https://handle.test.datacite.org/10.5072/zenodo.637475)
+```
