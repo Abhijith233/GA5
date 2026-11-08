@@ -14,7 +14,7 @@
     /fs/ess/PAS3493/people/abhijith12/GA5
     ```
 
--   GitHub repository: TODO — not yet created/linked
+-   GitHub repository: <https://github.com/Abhijith233/GA5.git>
 
 ## Prerequisites
 
@@ -69,8 +69,7 @@ do
 done
 ```
 
-Wait until all the `trimgalore` jobs have finished (check with `squeue -u $USER`) and
-check the Slurm logs for errors before moving on to Step 2 or Step 3.
+Wait until all the `trimgalore` jobs have finished (check with `squeue -u $USER`) and check the Slurm logs for errors before moving on to Step 2 or Step 3.
 
 ## Step 2: Creating a transcriptome index with Salmon
 
@@ -81,8 +80,7 @@ sbatch scripts/salmon_index.sh \
     "$outdir"/salmon_index
 ```
 
-Wait until the `salmon_index` job has finished and check its Slurm log for errors
-before moving on to Step 3.
+Wait until the `salmon_index` job has finished and check its Slurm log for errors before moving on to Step 3.
 
 ## Step 3: Pseudo-alignment and quantification with Salmon
 
@@ -108,10 +106,7 @@ do
 done
 ```
 
-Wait until all the `salmon_quant` jobs have finished and check their Slurm logs for
-errors before moving on to Step 4. The commands below are optional exploratory
-checks on the quantification output of sample S63 — adjust the sample ID and
-transcript ID to match your own results if you run them:
+Wait until all the `salmon_quant` jobs have finished and check their Slurm logs for errors before moving on to Step 4. The commands below are optional exploratory checks on the quantification output of sample S63 — adjust the sample ID and transcript ID to match your own results if you run them:
 
 ```         
 # Display the header and the top three transcripts by NumReads
@@ -127,8 +122,7 @@ grep "mapping rate" results/salmon_quant/*/logs/salmon_quant.log
 
 ## Step 4: Summarizing the results of all steps with MultiQC
 
-Only run this step after all Trim Galore, Salmon index, and Salmon quant jobs
-(Steps 1-3) have finished, since MultiQC scans the entire `results` dir.
+Only run this step after all Trim Galore, Salmon index, and Salmon quant jobs (Steps 1-3) have finished, since MultiQC scans the entire `results` dir.
 
 ```         
 # Run MultiQC on the entire results directory

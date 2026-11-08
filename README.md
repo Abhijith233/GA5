@@ -1,20 +1,3 @@
-```{=html}
-<!--
-GA5 README template.
-- Add your answers to each question's section below.
-- For each question where we want you to add your commands,
-  put the command(s) you ran in the terminal in the corresponding ```bash code block.
-- Where we want to see a command's output, there is a plain ``` code block
-  right below the command block: paste the output there.
-- The code to run each step of the workflow goes in `protocol.md`, not here:
-  you don't need to repeat it in this file.
-- You don't need to paste the contents of your scripts into this file:
-  we will look at the scripts in your `scripts` dir directly
-  (so make sure you commit them!).
-- Delete instructional comments like this one as you go.
--->
-```
-
 # GA5 answers - Abhijith Anil
 
 ------------------------------------------------------------------------
@@ -23,11 +6,7 @@ GA5 README template.
 
 ### 1: Fill in the top of the protocol
 
-<!-- No answer needed here -- we check `protocol.md` directly. -->
-
 ### 2: Markdown formatting
-
-<!-- No answer needed here -- we check the formatting of both Markdown files. -->
 
 ### 3: Create subdirs, and copy the scripts
 
@@ -37,11 +16,7 @@ mkdir -p scripts data/ref results
 
 ### 4: Initialize a Git repository, and commit your first files
 
-<!-- No answer needed here -- we check the repo directly. -->
-
 ### 5: Download the reference transcriptome
-
-<!-- Put the download command in `protocol.md`, not here. -->
 
 Code to count the number of transcripts:
 
@@ -62,8 +37,6 @@ The output of the command was:
 ## Part B: Read trimming
 
 ### 6: Run TrimGalore
-
-<!-- Put the code to run TrimGalore in `protocol.md`, not here. -->
 
 *Answer*: Whether all batch jobs succeeded, and how you checked that (and any problems you encountered, and how you solved them): All seven batches were completed successfully. The status of job was checked using squeue -u \$USER -l command. Inorder to see all the files have 'successfully finished' message, tail command was utilized (tail slurm-trimgalore-\*.out). Also fastq files ,and trimming reports were formed in output directory.
 
@@ -90,8 +63,6 @@ The output of the command was:
 *Answer*: The size of the index dir: 1.1 GB
 
 ### 8: Run Salmon for all samples
-
-<!-- No answer needed here -- we check `protocol.md` directly. -->
 
 ### 9: The transcripts with the most reads
 
@@ -151,8 +122,6 @@ results/salmon_quant/S69/logs/salmon_quant.log:mapping rate: 82.1824%
 
 ### 12: Update your MultiQC script
 
-<!-- No need to paste the script: we'll look at scripts/multiqc.sh and its Git history directly. -->
-
 ### 13: Run MultiQC
 
 *Answer*: For each program, the number of reports that MultiQC found, and why it found this number: Multiqc found reports from Salmon, Trimgalore and Fastqc. It found 7 salmon metareports, 7 fragment length distribution and 7 library format counts as salmon formed one report of each type for seven samples. It found 14 trim galore reports and 14 fastqc reports as the samples are paired ending having R1 and R2 so 14 reports.
@@ -186,8 +155,6 @@ results/salmon_quant/S69/logs/salmon_quant.log:mapping rate: 82.1824%
 ## Part F: Publish your repo on GitHub
 
 ### 19: Create a GitHub repository and push
-
-<!-- No answer needed here -- we check your GitHub repo directly. -->
 
 ### 20: Get a (test) DOI with Zenodo
 
