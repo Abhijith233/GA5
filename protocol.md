@@ -4,7 +4,7 @@
 
 -   Date created: 11/5/2026
 
--   Date last modified: \<???\>
+-   Date last modified: 11/8/2026
 
 -   This was run at the Pitzer cluster of the Ohio Supercomputer Center (<https://www.osc.edu>)
 
@@ -14,7 +14,7 @@
     /fs/ess/PAS3493/people/abhijith12/GA5
     ```
 
--   GitHub repository: \<???\>
+-   GitHub repository: TODO — not yet created/linked
 
 ## Prerequisites
 
@@ -56,6 +56,8 @@ outdir=results
 mkdir -p "$outdir"/trimgalore
 
 # Run Trim Galore for each sample
+# (This workflow only processes the "S6*" samples, a subset of the files in
+# "$fastq_dir" -- adjust the glob below if you want to process a different set.)
 for r1_fastq in "$fastq_dir"/S6*_R1.fastq.gz
 do
     r2_fastq="${r1_fastq/_R1/_R2}"
@@ -67,36 +69,51 @@ do
 done
 ```
 
+Wait until all the `trimgalore` jobs have finished (check with `squeue -u $USER`) and
+check the Slurm logs for errors before moving on to Step 2 or Step 3.
+
 ## Step 2: Creating a transcriptome index with Salmon
 
 ```         
-# Create a Salmon index 
-sbatch scripts/salmon_index.sh \    
-"$ref_transcripts" \    
-"$outdir"/salmon_index
+# Create a Salmon index
+sbatch scripts/salmon_index.sh \
+    "$ref_transcripts" \
+    "$outdir"/salmon_index
 ```
+
+Wait until the `salmon_index` job has finished and check its Slurm log for errors
+before moving on to Step 3.
 
 ## Step 3: Pseudo-alignment and quantification with Salmon
 
 ```         
-# Define input and output directories 
-fastq_dir=results/trimgalore 
-index_dir=results/salmon_index 
-outdir=results/salmon_quant  
+# Define input and output directories
+fastq_dir=results/trimgalore
+index_dir=results/salmon_index
+outdir=results/salmon_quant
 
-# Create the output directory 
-mkdir -p "$outdir"  
+# Create the output directory
+mkdir -p "$outdir"
 
-# Run Salmon quantification for each sample 
-for r1_fastq in "$fastq_dir"/S6*_R1.fastq.gz 
-do     
-r2_fastq="${r1_fastq/_R1/_R2}"      
-sbatch scripts/salmon_quant.sh \        
-"$r1_fastq" \         
-"$r2_fastq" \         
-"$index_dir" \       
-"$outdir" done
+# Run Salmon quantification for each sample
+for r1_fastq in "$fastq_dir"/S6*_R1.fastq.gz
+do
+    r2_fastq="${r1_fastq/_R1/_R2}"
 
+    sbatch scripts/salmon_quant.sh \
+        "$r1_fastq" \
+        "$r2_fastq" \
+        "$index_dir" \
+        "$outdir"
+done
+```
+
+Wait until all the `salmon_quant` jobs have finished and check their Slurm logs for
+errors before moving on to Step 4. The commands below are optional exploratory
+checks on the quantification output of sample S63 — adjust the sample ID and
+transcript ID to match your own results if you run them:
+
+```         
 # Display the header and the top three transcripts by NumReads
 (head -n 1 results/salmon_quant/S63/quant.sf
 tail -n +2 results/salmon_quant/S63/quant.sf | sort -k5,5nr | head -n 3)
@@ -110,9 +127,12 @@ grep "mapping rate" results/salmon_quant/*/logs/salmon_quant.log
 
 ## Step 4: Summarizing the results of all steps with MultiQC
 
+Only run this step after all Trim Galore, Salmon index, and Salmon quant jobs
+(Steps 1-3) have finished, since MultiQC scans the entire `results` dir.
+
 ```         
-# Run MultiQC on the entire results directory 
-indir=results 
-outdir=results/multiqc  
+# Run MultiQC on the entire results directory
+indir=results
+outdir=results/multiqc
 sbatch scripts/multiqc.sh "$indir" "$outdir"
 ```

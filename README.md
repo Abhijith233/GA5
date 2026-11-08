@@ -175,11 +175,11 @@ results/salmon_quant/S69/logs/salmon_quant.log:mapping rate: 82.1824%
 
 ### 17: Claude's review of your protocol and scripts
 
-*Answer*: At least three of Claude's suggestions, and whether you agree or disagree with each one, and why:
+*Answer*: At least three of Claude's suggestions, and whether you agree or disagree with each one, and why: 1. Correct the formatting of Salmon quantification commands: I agree with this suggestion that because the step 3 had formatting issues which could make it difficult to copy. 2. Include instructions for checking job completion: I agree to this instruction because the protocol should explain to users to confirm the previous job has completed before starting next workflow. 3. Explain the sample selection pattern: I agree because the S6\*\_R1.fastq.gz selects the 7 samples from larger data set. Keeping this selection makes it clearer which samples are selected.
 
 ### 18: Address a suggestion
 
-*Answer*: Which suggestion(s) you addressed, and what you changed:
+*Answer*: Which suggestion(s) you addressed, and what you changed: With the help of claude rewrote the the for/sbatch loop with correct line breaks so its copy pasteable, split quant.sf/zgrep commands in separate blocks. Added wait until jobs finish, check logs after step 1, 2 and 3 and before step 4. Fixed usage comment and added missing (`SBATCH --cpus-per-task=4` / `--time=20)` directives in multiqc.sh.
 
 ------------------------------------------------------------------------
 
